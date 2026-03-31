@@ -1,4 +1,4 @@
-Live Demo Output: [text](https://jayveeerandio.github.io/grocerian/)
+Live demo output [here](https://jayveeerandio.github.io/grocerian/)
 
 Hello there!
 
