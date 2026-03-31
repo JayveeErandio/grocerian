@@ -7,7 +7,12 @@ export default function App() {
   const [count, setCount] = useState(3);
 
   return (
-    <div className="bg-gray-200 h-screen pt-6">
+    <div
+      className="h-screen pt-6"
+      style={{
+        background: "var(--background1)",
+      }}
+    >
       <div className="mx-6">
         <Header />
       </div>

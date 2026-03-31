@@ -7,4 +7,19 @@
 
 * {
   font-family: archivo;
+  transition: all 0.3s;
+}
+
+:root {
+  --background1: #e7e7e7;
+  --background2: #ffffff;
+  --color1: #222222;
+  --invert: invert(0%);
+}
+
+[data-theme="dark"] {
+  --background1: #333;
+  --background2: #555;
+  --color1: #eee;
+  --invert: invert(100%);
 }

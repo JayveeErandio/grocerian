@@ -1,22 +1,21 @@
 import { useState, useEffect } from "react";
 
 export default function DarkModeButton() {
-  const [dark, setDark] = useState(false);
-
-  useEffect(() => {
-    const root = window.document.documentElement;
-    if (dark) {
-      root.setAttribute("data-theme", "dark");
-    } else {
-      root.removeAttribute("data-theme");
-    }
-  }, [dark]);
+  const temp = document.querySelector("body");
+  let [mode, setMode] = useState("light");
+  const oppose = () => {
+    if (mode == "light") return "dark";
+    else return "light";
+  };
+  temp.setAttribute("data-theme", mode);
 
   return (
     <img
       className="h-7"
-      onClick={() => setDark(!dark)}
-      src={dark ? "icons/lightmode.svg" : "icons/darkmode.svg"}
+      onClick={() => {
+        setMode(oppose());
+      }}
+      src={"icons/" + oppose() + "mode.svg"}
     />
   );
 }
