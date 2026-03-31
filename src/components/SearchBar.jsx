@@ -9,7 +9,7 @@ export default function SearchBar({ onSearch }) {
   };
 
   return (
-    <div className="shadow-md bg-white flex items-center rounded-4xl px-3 w-full">
+    <div className="shadow-md card bg-white flex items-center rounded-4xl px-3 w-full">
       <img src="icons/search.svg" className="opacity-75 h-6 " />
       <input
         type="text"
