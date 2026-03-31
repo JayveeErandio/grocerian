@@ -6,7 +6,7 @@ export default function Header() {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
-    <div className="flex w-full items-center gap-4 justify-between">
+    <div className="flex w-full items-center gap-5 justify-between">
       <SearchBar onSearch={setSearchTerm} />
       <DarkModeButton />
     </div>
