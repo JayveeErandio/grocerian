@@ -1,16 +1,9 @@
-# React + Vite
+Hello there!
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This website is used only for showcasing my skills for React and Tailwind. Let's also add the usage of CI/CD, though I'm not sure if that's the right term but what I mean there is the automation of building process of my code.
 
-Currently, two official plugins are available:
+React uses a code version of web languages that github do not normall read like JSX file. Because of this, I have to manually build or convert those code into machine raw HTML CSS JS that github can read then.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+But due to frequent editing and update, having this process so can indeed takes my time. To ease and shorten the process, I just already implemented the push-code then github's build approach so that I only have to worry about the codes of react.
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Btw, I may not be able to track to those who plan to steal this my work but please I am requesting you to only freely see and use the live output and not claimning this my work. Thank you!
