@@ -12,8 +12,9 @@
 
 :root {
   --background1: #e7e7e7;
-  --background2: #ffffff;
-  --color1: #222222;
+  --background2: #fff;
+  --color1: #222;
+  --color2: #777;
   --invert: invert(0%);
 }
 
@@ -21,5 +22,10 @@
   --background1: #333;
   --background2: #555;
   --color1: #eee;
+  --color2: #aaa;
   --invert: invert(100%);
+}
+
+input::placeholder {
+  color: var(--color2);
 }
