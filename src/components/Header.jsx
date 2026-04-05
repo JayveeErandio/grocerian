@@ -9,7 +9,7 @@ export default function Header(props) {
   return (
     <div
       className={
-        "pb-3 flex w-full items-center gap-5 justify-between " + props.className
+        "py-3 flex w-full items-center gap-5 justify-between " + props.className
       }
       style={{ background: "var(--background1)" }}
     >

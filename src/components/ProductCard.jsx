@@ -12,6 +12,10 @@ export default function ProductCard(props) {
         <img
           className="object-cover absolute top-1/2 -translate-y-1/2"
           src={"products/" + props.name + ".png"}
+          onError={(e) => {
+            e.target.src = "products/undefined.png";
+            e.target.className += " opacity-50";
+          }}
         />
       </div>
 
