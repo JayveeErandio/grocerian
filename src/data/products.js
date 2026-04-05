@@ -3,7 +3,7 @@ const categories = [
     name: "Dairy",
     products: [
       { name: "milk", price: 20 },
-      { name: "chocolate milk", price: 15 },
+      { name: "milk chocolate", price: 15 },
       { name: "butter", price: 18 },
       { name: "cheese", price: 18 },
       { name: "yogurt", price: 18 },

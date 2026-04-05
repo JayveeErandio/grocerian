@@ -3,8 +3,16 @@ import "./App.css";
 import Header from "./components/Header.jsx";
 import ProductCard from "./components/ProductCard.jsx";
 
+class ProductCarted {
+  product_id;
+  quantity;
+}
+
 export default function App() {
-  const [count, setCount] = useState(3);
+  let data;
+  if (localStorage.getItem("grocerian"))
+    data = JSON.parse(localStorage.getItem("grocerian"));
+  else data = { cart: [] };
 
   return (
     <div
