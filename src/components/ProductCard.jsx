@@ -5,7 +5,7 @@ export default function ProductCard(props) {
 
   return (
     <div
-      className="relative shadow-md w-32 p-2.5 rounded-lg"
+      className="relative shadow-md w-33 p-2.5 rounded-lg"
       style={{ background: "var(--background2)" }}
     >
       <div className="w-full aspect-square relative">
