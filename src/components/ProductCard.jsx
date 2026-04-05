@@ -5,7 +5,7 @@ export default function ProductCard(props) {
 
   return (
     <div
-      className="relative shadow-md w-37.5 p-2.5 rounded-lg"
+      className="relative shadow-md w-32 p-2.5 rounded-lg"
       style={{ background: "var(--background2)" }}
     >
       <div className="w-full aspect-square relative">
@@ -15,8 +15,8 @@ export default function ProductCard(props) {
         />
       </div>
 
-      <div className="w-22" style={{ color: "var(--color1)" }}>
-        <p className="flex items-end text-sm leading-none min-h-[2rem]">
+      <div className="w-18" style={{ color: "var(--color1)" }}>
+        <p className="flex items-end text-xs leading-none min-h-[2rem]">
           {props.name
             ? props.name
                 ?.split(" ")
@@ -24,7 +24,7 @@ export default function ProductCard(props) {
                 .join(" ")
             : "Product"}
         </p>
-        <p className="font-bold text-lg">
+        <p className="font-bold text-md">
           {props.price ? "₱" + props.price : "Price"}
         </p>
       </div>

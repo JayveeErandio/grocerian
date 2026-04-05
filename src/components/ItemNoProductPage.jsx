@@ -7,8 +7,8 @@ export default function ItemNoProductPage(props) {
     <div
       className={props.className}
       style={{
-        width: 95,
-        height: 95,
+        width: 90,
+        height: 90,
       }}
     >
       <div
