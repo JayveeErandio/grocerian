@@ -16,7 +16,7 @@ export default function ProductCard(props) {
       </div>
 
       <div className="w-18" style={{ color: "var(--color1)" }}>
-        <p className="flex items-end text-xs leading-none min-h-[2rem]">
+        <p className="flex items-end text-xs leading-none min-h-[2.4rem]">
           {props.name
             ? props.name
                 ?.split(" ")

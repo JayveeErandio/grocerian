@@ -18,7 +18,7 @@ export default function App() {
         <div className="grid justify-center gap-4 [grid-template-columns:repeat(auto-fit,132px)]">
           <ProductCard name="milk chocolate" price="875.59" />
           <ProductCard name="butter" price="109.00" />
-          <ProductCard />
+          <ProductCard name="Fleux De Bananue Amoir" />
           <ProductCard />
         </div>
       </div>
