@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from "react";
-import { UserContext } from "../data/userdata";
+import { ProductCarted, UserContext } from "../data/userdata";
+import groceryData from "../data/products.js";
 
 export default function CartPage() {
   const { userData, setUserData } = useContext(UserContext);
@@ -19,10 +20,24 @@ export default function CartPage() {
     if (window.innerWidth < 1024) return "cartPageMobileIn";
     else return "cartPageDesktopIn";
   }
-
   function outAnim() {
     if (window.innerWidth < 1024) return "cartPageMobileOut";
     else return "cartPageDesktopOut";
+  }
+
+  function getData(id) {
+    for (let category of groceryData) {
+      for (let product of category.products) {
+        if (product.id == id) return product;
+      }
+    }
+  }
+
+  function sentenceCase(text) {
+    return text
+      ?.split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
   }
 
   return (
@@ -40,8 +55,8 @@ export default function CartPage() {
         }
         style={{ background: "var(--background1)" }}
       >
-        <div className="mt-12 mx-5 sm:w-110 sm:mx-auto lg:w-auto lg:mx-5">
-          <header>
+        <div className="flex flex-col justify-between h-full pt-12 mx-5 sm:w-110 sm:mx-auto lg:w-auto lg:mx-5">
+          <header className="z-1">
             <div className="grid relative items-center">
               <p
                 className="leading-6 text-center text-3xl font-bold"
@@ -59,21 +74,18 @@ export default function CartPage() {
               />
             </div>
             <div
-              className="text-sm p-2 shadow-md rounded-xl mt-6 flex"
+              className="text-sm py-2 shadow-md rounded-xl mt-6 flex"
               style={{
                 background: "var(--background2)",
               }}
             >
-              <div className="flex-1 border-r-1 border-gray-400 py-1">
-                <div className="cursor-pointer flex gap-2 items-center w-max">
-                  <svg className="w-6 h-6">
-                    <rect
-                      className="w-6 h-6"
-                      rx="5"
-                      ry="5"
-                      fill="var(--background1)"
-                    />
-                  </svg>
+              <div className="flex-1 border-r-1 border-gray-400">
+                <div className="ml-1 cursor-pointer flex gap-1 items-center w-max">
+                  <img
+                    style={{ filter: "var(--invert)" }}
+                    className="w-8"
+                    src="icons/checkbox_unchecked.svg"
+                  />
                   <p style={{ color: "var(--color1)" }}>Select All</p>
                 </div>
               </div>
@@ -84,10 +96,56 @@ export default function CartPage() {
               </div>
             </div>
           </header>
-          <div></div>
-          <div></div>
-          <div></div>
-          <footer></footer>
+          <div className="-my-6 overflow-auto flex-1 py-6">
+            {(() => {
+              if (!userData.cart.length)
+                return (
+                  <p
+                    className="text-center mt-10 opacity-50"
+                    style={{ color: "var(--color1)" }}
+                  >
+                    Your cart is empty yet.
+                  </p>
+                );
+            })()}
+            {userData.cart.map((productCarted, index) => (
+              <div
+                key={index}
+                className="my-6 rounded-xl shadow-md p-1 flex gap-1 pt-2"
+                style={{ background: "var(--background2)" }}
+              >
+                <img
+                  src="icons/checkbox_unchecked.svg"
+                  style={{ filter: "var(--invert)" }}
+                  className="w-8"
+                />
+                <div className="h-14 aspect-square relative">
+                  <img
+                    className="object-cover absolute top-1/2 -translate-y-1/2"
+                    src={"products/" + getData(productCarted.id).name + ".png"}
+                  />
+                </div>
+                <div className="ml-2 text-sm">
+                  <p style={{ color: "var(--color1)" }}>
+                    {sentenceCase(getData(productCarted.id).name)}
+                  </p>
+                  <p className="text-xs" style={{ color: "var(--color3)" }}>
+                    ₱{getData(productCarted.id).price}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <footer
+            className="z-1 flex justify-between p-5 rounded-t-3xl"
+            style={{ background: "#080" }}
+          >
+            <button>Buy Now</button>
+            <div className="text-right">
+              <p>Total</p>
+              <p>P365.07</p>
+            </div>
+          </footer>
         </div>
       </div>
     </div>
