@@ -31,6 +31,7 @@ export default function App() {
                 {category.products.map((products) => (
                   <ProductCard
                     key={products.id}
+                    id={products.id}
                     name={products.name}
                     price={products.price?.toFixed(2)}
                   />

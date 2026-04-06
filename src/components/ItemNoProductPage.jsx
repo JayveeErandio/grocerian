@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function ItemNoProductPage(props) {
-  let [quantity, setQuantity] = useState(0);
+  let [quantity, setQuantity] = useState(props.quantity ?? 0);
+
+  useEffect(() => {
+    props.quantify(quantity);
+  }, [quantity]);
 
   return (
     <div

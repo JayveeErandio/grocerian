@@ -1,7 +1,43 @@
+import { useContext, useEffect, useState } from "react";
+import { UserContext, ProductCarted } from "../data/userdata";
 import ItemNoProductPage from "./ItemNoProductPage";
 
 export default function ProductCard(props) {
-  let baho = props.name;
+  const { userData, setUserData } = useContext(UserContext);
+
+  const getQuantity = () => {
+    for (let productCarted of userData.cart) {
+      if (productCarted.id == props.id) {
+        return productCarted.quantity;
+      }
+    }
+  };
+
+  const [quantity, setQuantity] = useState(() => getQuantity() ?? 0);
+
+  useEffect(() => {
+    if (quantity > 0) {
+      const exists = userData.cart.some((item) => item.id == props.id);
+
+      const updatedCart = exists
+        ? userData.cart.map((item) =>
+            item.id == props.id ? { ...item, quantity: quantity } : item,
+          )
+        : [...userData.cart, { id: props.id, quantity: quantity }];
+
+      setUserData({
+        ...userData,
+        cart: updatedCart,
+      });
+    } else {
+      const updatedCart = userData.cart.filter((item) => item.id != props.id);
+
+      setUserData({
+        ...userData,
+        cart: updatedCart,
+      });
+    }
+  }, [quantity]);
 
   return (
     <div
@@ -32,7 +68,11 @@ export default function ProductCard(props) {
           {props.price ? "₱" + props.price : "Price"}
         </p>
       </div>
-      <ItemNoProductPage className="absolute right-0 bottom-0 translate-5 z-1" />
+      <ItemNoProductPage
+        quantify={setQuantity}
+        quantity={getQuantity()}
+        className="absolute right-0 bottom-0 translate-5 z-1"
+      />
     </div>
   );
 }

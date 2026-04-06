@@ -2,13 +2,18 @@ import { createContext, useState, useEffect } from "react";
 
 export const UserContext = createContext();
 
+export class ProductCarted {
+  id;
+  quantity;
+}
+
 export function UserProvider({ children }) {
   const [userData, setUserData] = useState(() => {
     const stored = localStorage.getItem("grocerian");
     return stored
       ? JSON.parse(stored)
       : {
-          cart: {},
+          cart: [],
           darkMode: false,
         };
   });
