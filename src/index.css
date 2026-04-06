@@ -42,6 +42,14 @@ input::placeholder {
   animation: mobileOut 0.5s forwards;
 }
 
+.cartPageDesktopIn {
+  animation: desktopIn 0.5s forwards;
+}
+
+.cartPageDesktopOut {
+  animation: desktopOut 0.5s forwards;
+}
+
 @keyframes mobileIn {
   0% {
     transform: translate(30%, 40%) scale(15%, 10%);
@@ -63,5 +71,23 @@ input::placeholder {
   }
   100% {
     transform: translate(30%, 40%) scale(15%, 10%);
+  }
+}
+
+@keyframes desktopIn {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes desktopOut {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
   }
 }

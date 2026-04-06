@@ -10,9 +10,20 @@ export default function CartPage() {
     else {
       setTimeout(function () {
         setShow(false);
+        document.querySelector("body").style.overflow = "";
       }, 500);
     }
   }, [userData.showCart]);
+
+  function inAnim() {
+    if (window.innerWidth < 1024) return "cartPageMobileIn";
+    else return "cartPageDesktopIn";
+  }
+
+  function outAnim() {
+    if (window.innerWidth < 1024) return "cartPageMobileOut";
+    else return "cartPageDesktopOut";
+  }
 
   return (
     <div className={show ? "block" : "hidden"}>
@@ -25,7 +36,7 @@ export default function CartPage() {
       <div
         className={
           " w-full lg:w-90 h-full fixed top-0 lg:top-0 lg:right-0 z-2 " +
-          (userData.showCart ? "cartPageMobileIn" : "cartPageMobileOut")
+          (userData.showCart ? inAnim() : outAnim())
         }
         style={{ background: "var(--background1)" }}
       >
@@ -44,7 +55,6 @@ export default function CartPage() {
                 style={{ filter: "var(--invert)" }}
                 onClick={() => {
                   setUserData({ ...userData, showCart: false });
-                  document.querySelector("body").style.overflow = "";
                 }}
               />
             </div>
