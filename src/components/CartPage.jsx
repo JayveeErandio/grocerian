@@ -7,6 +7,16 @@ export default function CartPage() {
   const { userData, setUserData } = useContext(UserContext);
   const [show, setShow] = useState(false);
   const [total, setTotal] = useState(0);
+  function performTotal() {
+    let temp = 0;
+    for (let product of userData.cart) {
+      temp += getData(product.id).price * product.quantity;
+    }
+    setTotal(temp);
+  }
+  useEffect(() => {
+    performTotal();
+  }, [userData.cart]);
 
   useEffect(() => {
     if (userData.showCart) setShow(true);
