@@ -1,9 +1,10 @@
 import { useEffect, useState, useContext } from "react";
-import { ProductCarted, UserContext } from "../data/userdata";
 
 export default function CartedProduct(props) {
-  const { userData, setUserData } = useContext(UserContext);
-  const [quantity, setQuantity] = useState(props.prod.quantity);
+  let [defQuantity, defSetQuantity] = useState(0);
+
+  let quantity = props.quantity ?? defQuantity;
+  let setQuantity = props.setQuantity ?? defSetQuantity;
 
   function sentenceCase(text) {
     return text
@@ -11,16 +12,6 @@ export default function CartedProduct(props) {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   }
-
-  useEffect(() => {
-    const temp = userData.cart.map((item) =>
-      item.id == props.prod.id ? { ...item, quantity: quantity } : item,
-    );
-    setUserData({
-      ...userData,
-      cart: temp,
-    });
-  }, [quantity]);
 
   const cost = props.reference.price * props.prod.quantity;
   useEffect(() => {

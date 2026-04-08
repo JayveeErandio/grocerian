@@ -113,12 +113,25 @@ export default function CartPage() {
                   </p>
                 );
             })()}
-            {userData.cart.map((productCarted, index) => (
+            {userData.cart.map((product, index) => (
               <CartedProduct
-                prod={productCarted}
+                quantity={
+                  userData.cart.find((item) => item.id == product.id).quantity
+                }
+                setQuantity={(newQuantity) => {
+                  setUserData((prev) => ({
+                    ...prev,
+                    cart: prev.cart.map((item) =>
+                      item.id === product.id
+                        ? { ...item, quantity: newQuantity }
+                        : item,
+                    ),
+                  }));
+                }}
+                prod={product}
                 key={index}
                 id={index}
-                reference={getData(productCarted.id)}
+                reference={getData(product.id)}
                 setTotal={setTotal}
               />
             ))}
