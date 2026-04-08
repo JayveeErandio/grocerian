@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
-import { ProductCarted, UserContext } from "../data/userdata";
 
 export default function ItemNoProductPage(props) {
-  let [quantity, setQuantity] = useState(props.quantity ?? 0);
+  let [defQuantity, defSetQuantity] = useState(0);
 
-  useEffect(() => {
-    props.quantify(quantity);
-  }, [quantity]);
+  let quantity = props.quantity ?? defQuantity;
+  let setQuantity = props.setQuantity ?? defSetQuantity;
 
   return (
     <div
@@ -19,6 +17,7 @@ export default function ItemNoProductPage(props) {
       <div
         className={`${quantity > 0 ? "w-full h-full " : "w-0 h-0"} absolute top-1/2 left-1/2 -translate-1/2`}
       >
+        {/* Long Hotdog Shape */}
         <div
           className="w-full rotate-45 h-full scale-x-35 scale-y-120 bg-red-500"
           style={{
@@ -43,6 +42,7 @@ export default function ItemNoProductPage(props) {
           }}
         />
       </div>
+      {/* Main Center */}
       <p
         className="text-2xl flex justify-center items-center text-white absolute top-1/2 left-1/2 -translate-1/2 w-45/100 h-45/100"
         style={{

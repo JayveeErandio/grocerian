@@ -5,15 +5,15 @@ import ItemNoProductPage from "./ItemNoProductPage";
 export default function ProductCard(props) {
   const { userData, setUserData } = useContext(UserContext);
 
-  const getQuantity = () => {
-    for (let productCarted of userData.cart) {
-      if (productCarted.id == props.id) {
-        return productCarted.quantity;
-      }
-    }
-  };
+  //A template for the product that is not yet carted
+  let nonCarted = { id: props.id, quantity: 0, isListed: true };
 
-  const [quantity, setQuantity] = useState(() => getQuantity() ?? 0);
+  let quantity =
+    userData.cart.find((item) => item.id == props.id)?.quantity || 0;
+
+  useEffect(() => {
+    quantity = userData.cart.find((item) => item.id == props.id)?.quantity || 0;
+  }, [userData]);
 
   useEffect(() => {
     if (quantity > 0) {
@@ -72,8 +72,22 @@ export default function ProductCard(props) {
         </p>
       </div>
       <ItemNoProductPage
-        quantify={setQuantity}
-        quantity={getQuantity()}
+        quantity={quantity}
+        setQuantity={(newQty) => {
+          // An event of quantity 0 to 1 (Inserting to cart)
+          if (quantity == 0) {
+            setUserData((prev) => ({
+              ...prev,
+              cart: prev.cart.concat(nonCarted),
+            }));
+          }
+          setUserData((prev) => ({
+            ...prev,
+            cart: prev.cart.map((item) =>
+              item.id === props.id ? { ...item, quantity: newQty } : item,
+            ),
+          }));
+        }}
         className="absolute right-0 bottom-0 translate-5 z-1"
       />
     </div>
