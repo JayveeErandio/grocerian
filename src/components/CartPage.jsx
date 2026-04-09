@@ -6,7 +6,7 @@ import Checkbox from "./Checkbox.jsx";
 import ModalRemove from "./ModalRemove.jsx";
 import { sentence_case } from "../functions.js";
 
-export default function CartPage({ setPurchase }) {
+export default function CartPage({ setPurchase, setCost }) {
   const { userData, setUserData } = useContext(UserContext);
   const [show, setShow] = useState(false);
   const [total, setTotal] = useState(0);
@@ -213,6 +213,7 @@ export default function CartPage({ setPurchase }) {
               }
               onClick={() => {
                 if (total > 0) {
+                  setCost(total);
                   setPurchase(true);
                   setUserData({ ...userData, showCart: false });
                 }

@@ -24,5 +24,17 @@ export function date_format(timestamp) {
     hour12: true,
   });
 
+  result = result.slice(0, -2) + result.slice(-2).toLowerCase();
+
   return result;
+}
+
+export function money_format(value) {
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+  return formatter.format(value).slice(1);
 }
