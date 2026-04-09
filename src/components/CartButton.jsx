@@ -21,7 +21,7 @@ export default function CartButton(props) {
       }}
     >
       <img
-        src="icons/cart.svg"
+        src="icons/cart_logo.svg"
         style={{ filter: "var(--invert)", width: "100%" }}
       />
     </div>

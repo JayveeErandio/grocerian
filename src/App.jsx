@@ -1,16 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./App.css";
 import Header from "./components/Header.jsx";
 import ProductCard from "./components/ProductCard.jsx";
 import groceryData from "./data/products.js";
-import { UserProvider } from "./data/userdata.jsx";
 import CartPage from "./components/CartPage.jsx";
 import CartButton from "./components/CartButton.jsx";
-import ModalRemove from "./components/ModalRemove.jsx";
+import ModalPurchase from "./components/ModalPurchase.jsx";
+import { UserContext } from "./data/userdata.jsx";
 
 export default function App() {
+  const { userData, setUserData } = useContext(UserContext);
+  let [showPurchase, setShowPurchase] = useState(false);
   return (
-    <UserProvider>
+    <>
       <div
         className="min-h-screen pt-6 lg:pt-12"
         style={{
@@ -46,7 +48,8 @@ export default function App() {
         </div>
       </div>
       <CartButton className="fixed bottom-8 right-8 z-1 w-20 lg:hidden" />
-      <CartPage />
-    </UserProvider>
+      <CartPage setPurchase={setShowPurchase} />
+      <ModalPurchase state={[showPurchase, setShowPurchase]} />
+    </>
   );
 }

@@ -6,7 +6,7 @@ import Checkbox from "./Checkbox.jsx";
 import ModalRemove from "./ModalRemove.jsx";
 import { sentence_case } from "../functions.js";
 
-export default function CartPage() {
+export default function CartPage({ setPurchase }) {
   const { userData, setUserData } = useContext(UserContext);
   const [show, setShow] = useState(false);
   const [total, setTotal] = useState(0);
@@ -213,6 +213,7 @@ export default function CartPage() {
               }
               onClick={() => {
                 if (total > 0) {
+                  setPurchase(true);
                   setUserData({ ...userData, showCart: false });
                 }
               }}
@@ -232,7 +233,6 @@ export default function CartPage() {
       <ModalRemove
         ids={listRemove}
         set={(list) => {
-          console.log(list);
           setUserData({
             ...userData,
             cart: userData.cart.filter((product) => {
