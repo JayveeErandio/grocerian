@@ -6,6 +6,7 @@ import groceryData from "./data/products.js";
 import { UserProvider } from "./data/userdata.jsx";
 import CartPage from "./components/CartPage.jsx";
 import CartButton from "./components/CartButton.jsx";
+import ModalRemove from "./components/ModalRemove.jsx";
 
 export default function App() {
   return (

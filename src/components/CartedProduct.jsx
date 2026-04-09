@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import Checkbox from "./Checkbox";
-import { UserContext } from "../data/userdata";
+import { sentence_case } from "../functions";
+import ModalRemove from "./ModalRemove";
 
 export default function CartedProduct(props) {
   let [defQuantity, defSetQuantity] = useState(0);
@@ -10,13 +11,6 @@ export default function CartedProduct(props) {
   let [defCheck, defSetCheck] = useState(false);
   let check = props.check ?? defCheck;
   let setCheck = props.setCheck ?? defSetCheck;
-
-  function sentenceCase(text) {
-    return text
-      ?.split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  }
 
   const cost = props.reference.price * props.prod.quantity;
   useEffect(() => {
@@ -43,7 +37,7 @@ export default function CartedProduct(props) {
       </div>
       <div className="ml-2 text-sm flex-1">
         <p style={{ color: "var(--color1)" }}>
-          {sentenceCase(props.reference.name)}
+          {sentence_case(props.reference.name)}
         </p>
         <p className="text-xs" style={{ color: "var(--color3)" }}>
           ₱{props.reference.price?.toFixed(2)}
@@ -58,7 +52,10 @@ export default function CartedProduct(props) {
               color: "var(--color1)",
             }}
             onClick={() => {
-              setQuantity(quantity - 1);
+              if (quantity == 1) {
+                props.showRemove();
+                props.setMessageRemove(props.reference.name);
+              } else setQuantity(quantity - 1);
             }}
           >
             –

@@ -1,8 +1,10 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, use } from "react";
 import { ProductCarted, UserContext } from "../data/userdata";
 import groceryData from "../data/products.js";
 import CartedProduct from "./CartedProduct.jsx";
 import Checkbox from "./Checkbox.jsx";
+import ModalRemove from "./ModalRemove.jsx";
+import { sentence_case } from "../functions.js";
 
 export default function CartPage() {
   const { userData, setUserData } = useContext(UserContext);
@@ -19,6 +21,10 @@ export default function CartPage() {
   useEffect(() => {
     performTotal();
   }, [userData.cart]);
+
+  const [showRemove, setShowRemove] = useState(false);
+  let [productRemove, setProductRemove] = useState("");
+  let [listRemove, setListRemove] = useState([202]);
 
   useEffect(() => {
     if (userData.showCart) setShow(true);
@@ -123,6 +129,22 @@ export default function CartPage() {
                       ? "opacity-35 cursor-not-allowed"
                       : "cursor-pointer active:bg-rose-700 ")
                   }
+                  onClick={() => {
+                    if (total > 0) {
+                      setListRemove([]);
+                      let temp = [];
+                      for (let product of userData.cart) {
+                        if (product.isListed) temp.push(product.id);
+                      }
+                      setListRemove(temp);
+                      setProductRemove(
+                        temp.length > 1
+                          ? temp.length + " items"
+                          : sentence_case(getData(temp[0]).name),
+                      );
+                      setShowRemove(true);
+                    }
+                  }}
                 >
                   Remove From Cart
                 </button>
@@ -170,6 +192,11 @@ export default function CartPage() {
                 id={index}
                 reference={getData(product.id)}
                 setTotal={setTotal}
+                showRemove={() => {
+                  setListRemove([product.id]);
+                  setShowRemove(true);
+                }}
+                setMessageRemove={setProductRemove}
               />
             ))}
           </div>
@@ -201,6 +228,34 @@ export default function CartPage() {
           </footer>
         </div>
       </div>
+
+      <ModalRemove
+        ids={listRemove}
+        set={(list) => {
+          console.log(list);
+          setUserData({
+            ...userData,
+            cart: userData.cart.filter((product) => {
+              return !list.find((ev) => ev == product.id);
+            }),
+          });
+        }}
+        message={
+          <>
+            Remove{" "}
+            {isNaN(productRemove[0]) ? (
+              <strong>{productRemove}</strong>
+            ) : (
+              <>
+                {"the "}
+                <strong>{productRemove}</strong>
+              </>
+            )}{" "}
+            from your cart?
+          </>
+        }
+        state={[showRemove, setShowRemove]}
+      />
     </div>
   );
 }
