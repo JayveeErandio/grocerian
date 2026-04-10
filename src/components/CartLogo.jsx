@@ -56,6 +56,12 @@ export default function CartLogo({ animation, className }) {
               <circle r="1.5" cx="64.5" cy="43.5" fill="white" />
             </g>
           </g>
+          <path
+            fill="none"
+            d="M 40 53 Q 52 63 64 53"
+            strokeWidth="4.5"
+            stroke="#333"
+          />
         </g>
       </motion.g>
     </svg>
