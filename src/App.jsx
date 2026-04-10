@@ -7,11 +7,14 @@ import CartPage from "./components/CartPage.jsx";
 import CartButton from "./components/CartButton.jsx";
 import ModalPurchase from "./components/ModalPurchase.jsx";
 import { UserContext } from "./data/userdata.jsx";
+import { including } from "./functions.js";
 
 export default function App() {
   const { userData, setUserData } = useContext(UserContext);
-  let [showPurchase, setShowPurchase] = useState(false);
-  let [cost, setCost] = useState(0);
+  const [showPurchase, setShowPurchase] = useState(false);
+  const [cost, setCost] = useState(0);
+  const [search, setSearch] = useState("");
+
   return (
     <>
       <div
@@ -21,30 +24,48 @@ export default function App() {
         }}
       >
         <div className="mx-6 lg:mx-40">
-          <Header className="sticky top-0 z-2" />
+          <Header className="sticky top-0 z-2" setSearch={setSearch} />
           <div>
-            {groceryData.map((category) => (
-              <div
-                key={category.id}
-                className="grid justify-center gap-4 [grid-template-columns:repeat(auto-fit,132px)]"
-              >
-                <p
-                  className="mt-6 col-span-full font-bold text-2xl"
-                  style={{ color: "var(--color1)" }}
+            {groceryData.map((category) => {
+              let matchCategory = including(search, category.name); //Search Algorithm
+              let matchProduct = //Search Algorithm: Whether this category has at least one product matching the search term
+                category.products.find((prod) => {
+                  return including(search, prod.name);
+                })
+                  ? true
+                  : false;
+              return (
+                <div
+                  key={category.id}
+                  className={
+                    (!matchCategory ? (!matchProduct ? "hidden" : "") : "") +
+                    " grid justify-center gap-4 [grid-template-columns:repeat(auto-fit,132px)]"
+                  }
                 >
-                  {category.name}
-                </p>
-                {category.products.map((products) => (
-                  <ProductCard
-                    key={products.id}
-                    id={products.id}
-                    name={products.name}
-                    price={products.price}
-                  />
-                ))}
-                <div className="h-6 col-span-full"></div>
-              </div>
-            ))}
+                  <p
+                    className="mt-6 col-span-full font-bold text-2xl"
+                    style={{ color: "var(--color1)" }}
+                  >
+                    {category.name}
+                  </p>
+                  {category.products.map((product) => {
+                    let temp = including(search, product.name);
+                    return (
+                      <ProductCard
+                        key={product.id}
+                        id={product.id}
+                        name={product.name}
+                        price={product.price}
+                        className={
+                          !matchCategory ? (!temp ? "hidden" : "") : ""
+                        }
+                      />
+                    );
+                  })}
+                  <div className="h-6 col-span-full"></div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

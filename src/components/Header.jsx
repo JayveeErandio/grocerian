@@ -1,11 +1,13 @@
 import SearchBar from "./SearchBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DarkModeButton from "./DarkModeButton";
 import CartButton from "./CartButton";
 
 export default function Header(props) {
   const [searchTerm, setSearchTerm] = useState("");
-
+  useEffect(() => {
+    props.setSearch(searchTerm);
+  }, [searchTerm]);
   return (
     <div
       className={

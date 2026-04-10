@@ -38,3 +38,7 @@ export function money_format(value) {
   });
   return formatter.format(value).slice(1);
 }
+
+export function including(basis, target) {
+  return target.toLowerCase().includes(basis.toLowerCase().trim());
+}
