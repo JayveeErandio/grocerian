@@ -22,7 +22,7 @@ export default function Header(props) {
       <div className="hidden lg:flex items-center gap-7">
         <DarkModeButton className="h-8" />
         <CartButton
-          className="w-12 relative text-xs"
+          className="w-14 relative text-xs"
           quantity={(() => {
             let overall = 0;
             for (let prod of userData.cart) {

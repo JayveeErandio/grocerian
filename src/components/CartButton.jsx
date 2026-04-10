@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../data/userdata";
 import CartLogo from "./CartLogo";
 
@@ -8,6 +8,12 @@ export default function CartButton(props) {
 
   let quantity = props.quantity ?? defQuantity;
   let setQuantity = props.setQuantity ?? defSetQuantity;
+
+  let [animation, setAnimation] = useState("");
+
+  setTimeout(function () {
+    setAnimation("seek");
+  }, 2000);
 
   return (
     <div className={props.className}>
@@ -21,12 +27,16 @@ export default function CartButton(props) {
           document.querySelector("body").style.overflow = "hidden";
         }}
       >
-        <CartLogo className="w-full h-full p-[18%] filter-(--invert)" />
+        <CartLogo
+          animation={animation}
+          setAnimation={setAnimation}
+          className="w-full h-full p-[9%] filter-(--invert)"
+        />
       </div>
       <p
         className={
           (quantity == 0 ? "scale-0" : "") +
-          " text-lg lg:text-sm translate-x-[50%] -translate-y-[50%] absolute z-7 top-[15%] right-[15%] bg-red-500 w-[40%] lg:w-[50%] flex justify-center items-center text-white rounded-full aspect-square"
+          " text-lg lg:text-sm translate-x-[50%] -translate-y-[50%] absolute z-7 top-[10%] right-[10%] bg-red-500 w-[40%] lg:w-[50%] flex justify-center items-center text-white rounded-full aspect-square"
         }
       >
         {quantity}

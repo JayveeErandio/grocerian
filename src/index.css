@@ -97,3 +97,8 @@ input::placeholder {
     transform: translateX(100%);
   }
 }
+
+svg * {
+  transform-box: fill-box;
+  transform-origin: center;
+}
