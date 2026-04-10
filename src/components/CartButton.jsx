@@ -11,9 +11,28 @@ export default function CartButton(props) {
 
   let [animation, setAnimation] = useState("");
 
-  setTimeout(function () {
-    setAnimation("seek");
-  }, 2000);
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  useEffect(() => {
+    let running = true;
+
+    async function loop() {
+      while (running) {
+        setAnimation("seek");
+        await sleep(1800); // duration of seek
+        setAnimation("");
+        await sleep(3000); // duration of seek
+      }
+    }
+
+    loop();
+
+    return () => {
+      running = false; // cleanup on unmount
+    };
+  }, []);
 
   return (
     <div className={props.className}>
@@ -30,7 +49,7 @@ export default function CartButton(props) {
         <CartLogo
           animation={animation}
           setAnimation={setAnimation}
-          className="w-full h-full p-[9%] filter-(--invert)"
+          className="w-full h-full p-[5%] filter-(--invert)"
         />
       </div>
       <p
