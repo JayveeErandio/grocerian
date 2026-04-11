@@ -2,7 +2,29 @@ import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 
 export default function CartLogo({ animation, className }) {
-  const variants = {
+  const bodyVariants = {
+    seek: {
+      skewX: [0, 4, 8, 8, 0, -8, -8, -4, 0],
+      translateX: [0, -3, -5, -5, 0, 5, 5, 3, 0],
+      translateY: [0, 7, 0, 0, 7, 0, 0, 7, 0],
+      scaleY: [1, 0.8, 1, 1, 0.8, 1, 1, 0.8, 1],
+      transition: {
+        duration: 1.5,
+        ease: "linear",
+        times: [0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.8, 0.9, 1],
+      },
+    },
+    breath: {
+      scaleX: [1, 1.02, 1],
+      scaleY: [1, 0.95, 1],
+      translateY: [0, 3, 0],
+      transition: {
+        duration: 1.5,
+        repeat: Infinity,
+      },
+    },
+  };
+  const faceVariants = {
     seek: {
       skewX: [0, 4, 8, 8, 0, -8, -8, -4, 0],
       translateX: [0, -3, -5, -5, 0, 5, 5, 3, 0],
@@ -14,6 +36,35 @@ export default function CartLogo({ animation, className }) {
         times: [0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.8, 0.9, 1],
       },
     },
+    sad: {
+      translateY: [0, 3],
+    },
+  };
+  const mouthVariants = {
+    seek: {
+      d: [
+        "M 40 53 Q 52 63 64 53",
+        "M 40 53 Q 51 58 62 55.5", //midcompute
+        "M 40 53 Q 50 53 60 58", //frame2 stop1
+
+        "M 40 53 Q 50 53 60 58", //frame2 stop2
+        "M 50 54 Q 55 54 60 56.5", //midcompute
+        "M 60 55 Q 60 55 60 55", //frame3 stop1
+
+        "M 60 55 Q 60 55 60 55", //frame3 stop2
+        "M 50 54 Q 54 59 62 54", //midcompute
+        "M 40 53 Q 52 63 64 53",
+      ],
+      strokeWidth: [4.5, 4.5, 4.5, 4.5, 7, 9.5, 9.5, 7, 4.5],
+      transition: {
+        duration: 1.5,
+        ease: "linear",
+        times: [0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.8, 0.9, 1],
+      },
+    },
+    sad: {
+      d: ["M 40 53 Q 52 63 64 53", "M 43 56 Q 52 48 61 56"],
+    },
   };
 
   return (
@@ -21,17 +72,15 @@ export default function CartLogo({ animation, className }) {
       className={className}
       strokeLinejoin="round"
       strokeLinecap="round"
-      viewBox="-9 -6 116 118"
+      viewBox="-7 -7 112 114"
       width="70px"
       height="70px"
     >
       <motion.g
         id="body"
-        variants={variants}
+        variants={bodyVariants}
         animate={animation}
         style={{
-          transformOrigin: "center",
-          transformBox: "fill-box",
           transition: "none",
         }}
       >
@@ -45,24 +94,35 @@ export default function CartLogo({ animation, className }) {
           <circle id="cir" r="5" cx="30" cy="85" fill="#333" />
           <use href="#cir" x="47" />
         </g>
-        <g>
+        <motion.g
+          variants={faceVariants}
+          animate={animation}
+          style={{
+            transition: "none",
+          }}
+        >
           <g>
             <g>
-              <use href="#cir" x="12" y="-40" />
-              <circle r="1.5" cx="43.5" cy="43.5" fill="white" />
+              <use href="#cir" x="12" y="-41" />
+              <circle r="1.5" cx="43.5" cy="42.5" fill="white" />
             </g>
             <g>
-              <use href="#cir" x="33" y="-40" />
-              <circle r="1.5" cx="64.5" cy="43.5" fill="white" />
+              <use href="#cir" x="33" y="-41" />
+              <circle r="1.5" cx="64.5" cy="42.5" fill="white" />
             </g>
           </g>
-          <path
+          <motion.path
+            variants={mouthVariants}
+            animate={animation}
+            style={{
+              transition: "none",
+            }}
             fill="none"
             d="M 40 53 Q 52 63 64 53"
             strokeWidth="4.5"
             stroke="#333"
           />
-        </g>
+        </motion.g>
       </motion.g>
     </svg>
   );

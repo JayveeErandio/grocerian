@@ -23,8 +23,8 @@ export default function CartButton(props) {
         await sleep(1500);
         setAnimation("seek");
         await sleep(1800); // duration of seek
-        setAnimation("");
-        await sleep(2000); // duration of seek
+        setAnimation("breath");
+        await sleep(4000); // duration of seek
       }
     }
 
@@ -49,7 +49,6 @@ export default function CartButton(props) {
       >
         <CartLogo
           animation={animation}
-          setAnimation={setAnimation}
           className="w-full h-full p-[5%] filter-(--invert)"
         />
       </div>
