@@ -54,6 +54,36 @@ const categories = [
       { id: 408, name: "eggs", price: 99 },
     ],
   },
+  {
+    id: 5,
+    name: "Condiments",
+    products: [
+      { id: 501, name: "sugar", price: 295.5 },
+      { id: 502, name: "salt", price: 219 },
+      { id: 503, name: "pepper", price: 323 },
+      { id: 504, name: "ketchup", price: 550 },
+      { id: 505, name: "vinegar", price: 166.85 },
+      { id: 506, name: "soy sauce", price: 78.75 },
+      { id: 507, name: "mayo", price: 78.75 },
+    ],
+  },
+  {
+    id: 6,
+    name: "Hygiene",
+    products: [
+      { id: 601, name: "soap", price: 295.5 },
+      { id: 602, name: "shampoo", price: 219 },
+      { id: 603, name: "toothbrush", price: 323 },
+      { id: 604, name: "toothpaste", price: 550 },
+      { id: 605, name: "deodorant", price: 166.85 },
+      { id: 606, name: "lotion", price: 78.75 },
+      { id: 607, name: "alcohol", price: 78.75 },
+      { id: 608, name: "facial wash", price: 78.75 },
+      { id: 609, name: "tissue", price: 78.75 },
+      { id: 610, name: "laundry powder", price: 78.75 },
+      { id: 611, name: "sanitary pads", price: 78.75 },
+    ],
+  },
 ];
 
 const prepareProducts = () => {
