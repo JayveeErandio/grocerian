@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { motion } from "motion/react";
+import { UserContext } from "../data/userdata";
 
-export default function CartLogo({ animation, className }) {
+export default function CartLogo({ animation = "idle", className }) {
   const bodyVariants = {
     seek: {
       skewX: [0, 4, 8, 8, 0, -8, -8, -4, 0],
-      translateX: [0, -3, -5, -5, 0, 5, 5, 3, 0],
-      translateY: [0, 7, 0, 0, 7, 0, 0, 7, 0],
+      x: [0, -3, -5, -5, 0, 5, 5, 3, 0],
+      y: [0, 7, 0, 0, 7, 0, 0, 7, 0],
       scaleY: [1, 0.8, 1, 1, 0.8, 1, 1, 0.8, 1],
       transition: {
         duration: 1.5,
@@ -17,7 +18,7 @@ export default function CartLogo({ animation, className }) {
     breath: {
       scaleX: [1, 1.02, 1],
       scaleY: [1, 0.95, 1],
-      translateY: [0, 3, 0],
+      y: [0, 3, 0],
       transition: {
         duration: 1.5,
         repeat: Infinity,
@@ -27,8 +28,8 @@ export default function CartLogo({ animation, className }) {
   const faceVariants = {
     seek: {
       skewX: [0, 4, 8, 8, 0, -8, -8, -4, 0],
-      translateX: [0, -3, -5, -5, 0, 5, 5, 3, 0],
-      translateY: [0, 5, 0, 0, 5, 0, 0, 5, 0],
+      x: [0, -3, -5, -5, 0, 5, 5, 3, 0],
+      y: [0, 5, 0, 0, 5, 0, 0, 5, 0],
       scaleY: [1, 0.8, 1, 1, 0.8, 1, 1, 0.8, 1],
       transition: {
         duration: 1.5,
@@ -62,10 +63,26 @@ export default function CartLogo({ animation, className }) {
         times: [0, 0.1, 0.2, 0.4, 0.5, 0.6, 0.8, 0.9, 1],
       },
     },
+    breath: {
+      d: "M 40 53 Q 52 63 64 53",
+    },
     sad: {
       d: ["M 40 53 Q 52 63 64 53", "M 43 56 Q 52 48 61 56"],
     },
+    idle: {
+      d: "M 40 53 Q 52 63 64 53",
+    },
   };
+
+  const { userData, setUserData } = useContext(UserContext);
+
+  const [invert, setInvert] = useState(false);
+
+  useEffect(() => {
+    setInvert(
+      document.querySelector("body").getAttribute("data-theme") == "dark",
+    );
+  }, [userData]);
 
   return (
     <svg
@@ -104,16 +121,25 @@ export default function CartLogo({ animation, className }) {
           <g>
             <g>
               <use href="#cir" x="12" y="-41" />
-              <circle r="1.5" cx="43.5" cy="42.5" fill="white" />
+              {invert ? (
+                <circle r="1.5" cx="42" cy="44" fill="#aaa" />
+              ) : (
+                <circle r="1.5" cx="43.5" cy="42.5" fill="white" />
+              )}
             </g>
             <g>
               <use href="#cir" x="33" y="-41" />
-              <circle r="1.5" cx="64.5" cy="42.5" fill="white" />
+              {invert ? (
+                <circle r="1.5" cx="63" cy="44" fill="#aaa" />
+              ) : (
+                <circle r="1.5" cx="64.5" cy="42.5" fill="white" />
+              )}
             </g>
           </g>
           <motion.path
+            id="tae"
             variants={mouthVariants}
-            animate={animation}
+            animate={animation || "breath"}
             style={{
               transition: "none",
             }}

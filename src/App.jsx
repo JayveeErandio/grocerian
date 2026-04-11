@@ -15,6 +15,24 @@ export default function App() {
   const [cost, setCost] = useState(0);
   const [search, setSearch] = useState("");
 
+  useEffect(() => {
+    function handleLoad() {
+      console.log("All assets loaded (images, etc.)");
+      // your function here
+    }
+
+    if (document.readyState === "complete") {
+      // already loaded
+      handleLoad();
+    } else {
+      window.addEventListener("load", handleLoad);
+    }
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+    };
+  }, []);
+
   return (
     <>
       <div
